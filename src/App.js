@@ -10,8 +10,8 @@ function App(props) {
   const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
-    noteService.getAll().then((res) => {
-      setNotes(res);
+    noteService.getAll().then((initialNotes) => {
+      setNotes(initialNotes);
     });
   }, []);
 
@@ -51,9 +51,7 @@ function App(props) {
   const notesToShow = showAll
     ? notes
     : notes.filter((note) => note.important === true);
-
   const handleInputChange = (event) => {
-    console.log(event.target.value);
     setNewNote(event.target.value);
   };
 
@@ -66,7 +64,7 @@ function App(props) {
       <h1>Notes</h1>
       <Notification message={errorMessage} />
       <div>
-        <button onClick={handleImportance}>
+        <button onClick={() => handleImportance}>
           {showAll ? "show important" : "show All"}
         </button>
       </div>
@@ -80,15 +78,15 @@ function App(props) {
             />
           );
         })}
-        <form onSubmit={addNote}>
-          <input
-            onChange={handleInputChange}
-            value={newNote}
-            onClick={() => setNewNote("")}
-          />
-          <button>add note</button>
-        </form>
       </ul>
+      <form onSubmit={addNote}>
+        <input
+          onChange={handleInputChange}
+          value={newNote}
+          onClick={() => setNewNote("")}
+        />
+        <button>add note</button>
+      </form>
     </div>
   );
 }
