@@ -1,9 +1,9 @@
 import axios from "axios";
-const baseUrl = "/api/v1/notes";
-//const baseUrl = "http://localhost:3001/api/v1/notes";
+//const baseUrl = "/api/v1/notes";
+const baseUrl = "http://localhost:3001/api/v1/notes";
 const getAll = async () => {
-  const request = axios.get(baseUrl);
-  return request.then((response) => response.data);
+  const response = await axios.get(baseUrl);
+  return response.data;
 };
 
 const create = async (newObject) => {
@@ -17,7 +17,7 @@ const update = async (id, newObject) => {
 };
 
 export default {
-  getAll: getAll,
-  create: create,
-  update: update,
+  getAll,
+  create,
+  update,
 };
